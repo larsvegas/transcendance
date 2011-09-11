@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Get the new jQuery transcendance plugin to cycle your images - its free!">
+
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+
+	
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.transcendance.min.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+	
+	<script type="text/javascript">
+	
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-22031771-6']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script>
+
+<title>jQuery transcendance image slider</title>
+</head>
+
+<body>
+
+	<div id="topslide">
+	
+		<div id="header">
+		
+			<img src="css/img/transcendance_header_logo.gif" alt="Transcendance Logo" id="transcendance_logo" />
+			
+			<div id="nav">
+			
+				<a href="index.html" class="navlink">Home</a>
+				<a href="links/download.html" class="navlink">Download</a>
+				<a href="links/options.html" class="navlink">Options</a>
+				<a href="links/support.html" class="navlink">Support</a>
+			
+			</div> <!-- nav -->
+		
+		</div> <!-- header -->
+	
+	</div> <!-- topslide -->
+	
+	<!-- header end -->
+	
+	<div id="stageBackground">
+		
+		<div id="stage" class="hidden">
+		
+			<h1>Welcome to Transcendance</h1>
+			
+			<div id="hull">		
+				<img alt="" src="images/gallery/sicimg01.jpg" />			
+				<img alt="" src="images/gallery/sicimg02.jpg" />
+				<img alt="" src="images/gallery/sicimg03.jpg" />
+				<img alt="" src="images/gallery/sicimg04.jpg" />
+				<img alt="" src="images/gallery/sicimg05.jpg" />
+				<img alt="" src="images/gallery/sicimg06.jpg" />
+				<img alt="" src="images/gallery/sicimg07.jpg" />
+			</div> <!-- hull -->
+		
+		</div> <!-- stage -->
+		
+		<p class="warning">
+			<b>Please note:</b> You need to have JavaScript enabled in order to view this page correctly.
+		</p>
+		
+		<div class="shadowBottom"></div>
+
+	</div> <!-- stageBackground -->
+	
+	<div id="main">
+	
+		<div id="uiHull" class="hidden">
+		
+			<div id="uiProxy">
+		
+				<div id="ui">
+		
+					<div class="shadowTop"></div>
+					
+					<div class="uiRow">
+						<div class="uiContLeft">transxLength</div>
+						<div class="uiContDot">:</div>
+						<div class="uiContMid"><input id="uiInput1" maxlength="2" value="10" /></div>
+						<div class="uiContRight">// amount of horizontal cells </div>
+					</div>
+					
+					<div class="uiRow">
+						<div class="uiContLeft">transyLength</div>
+						<div class="uiContDot">:</div>
+						<div class="uiContMid"><input id="uiInput2" maxlength="2" value="4" /></div>
+						<div class="uiContRight">// amount of vertical cells </div>
+					</div>
+					
+					<div class="uiRow">
+						<div class="uiContLeft">transAnimSpeed</div>
+						<div class="uiContDot">:</div>
+						<div class="uiContMid"><input id="uiInput3" maxlength="4" value="900" /></div>
+						<div class="uiContRight">// cell fading speed [ms] </div>
+					</div>
+					
+					<div class="uiRow">
+						<div class="uiContLeft">transAnimDelay</div>
+						<div class="uiContDot">:</div>
+						<div class="uiContMid"><input id="uiInput4" maxlength="3" value="50" /></div>
+						<div class="uiContRight">// delay between two cells being faded [ms] </div>
+					</div>
+					
+					<div class="uiRow">
+						<div class="uiContLeft">transAnimType</div>
+						<div class="uiContDot">:</div>
+						<div class="uiContMid">
+							<select id="uiInput5">
+								<option>default</option>
+								<option>random</option>
+							</select>
+						</div>
+						<div class="uiContRight">// animation order of cells </div>
+					</div>
+					
+					<div class="uiRow">
+						<div class="uiContLeft">transAnimBounce</div>
+						<div class="uiContDot">:</div>
+						<div class="uiContMid">
+							<select id="uiInput6">
+								<option>false</option>
+								<option>true</option>
+							</select>
+						</div>
+						<div class="uiContRight">// if true, cell animation will go from bottom to top and vice versa </div>
+					</div>
+					
+					<div class="uiRow">
+						<div class="uiContLeft">transImgOrder</div>
+						<div class="uiContDot">:</div>
+						<div class="uiContMid">
+							<select id="uiInput7">
+								<option>default</option>
+								<option>random</option>
+							</select>
+						</div>
+						<div class="uiContRight">// determines which image will be cycled next </div>
+					</div>
+					
+					<div class="uiRow">
+						<div class="uiContLeft">transImgDelay</div>
+						<div class="uiContDot">:</div>
+						<div class="uiContMid"><input id="uiInput8" maxlength="4" value="1000" /></div>
+						<div class="uiContRight">// delay until the next image gets cycled [ms] </div>
+					</div>
+					
+					<div class="clear"></div>
+					
+					<div id="uiButtonApply" title="applies the current settings to the stage">apply</div>
+					<div id="uiButtonCode" title="gives out the current settings as code to put on your website">generate code</div>
+					
+					<div class="clear"></div>
+					
+					<div class="shadowBottom"></div>
+				
+				</div> <!-- ui -->
+
+				<p>
+					In the above interface you can type custom values which will then get applied to the cycle stage by pressing the "apply" button. 
+					By doing so, you can test how different settings look within the Transcendance plugin - <b>on the fly</b>.
+				</p>
+				<p>
+					If you like the current settings, click "generate code" to receive the exact code you are currently viewing to put on your website.
+				</p>
+				<span class="hint">
+					<b>Please note:</b> This is beta status. By applying new settings, display errors are likely to occur. It is recommended to simply reload the site then.
+				</span>
+				<hr />
+		
+			</div> <!-- uiproxy -->
+		
+		</div> <!-- uihull -->
+		
+		<span id="customizeButton" class="hidden" title="click to un-/hide the customization interface">customize</span>
+		
+		<h2>What is Transcendance?</h2>
+		<p>
+			Transcendance is a plugin for <a href="http://www.jquery.com" target="_blank">jQuery</a>. With it, you can cycle images on your website.
+		</p>
+		
+		<h2>Why choose Transcendance?</h2>
+		<p>
+			There are a lot of image cycle plugins for jQuery on the web. 
+			Only Transcendance though offers it's user a variety of customizing the way images are being cycled. 
+			In the above example you find the options you can define within Transcendance (if you click the "customize" button).
+		</p>
+		
+		<h2>What can it do?</h2>
+		<p>
+			For instance, you can define in how many blocks, called <i>cells</i>, your images are being split. 
+			You can define how long it takes a cell to fade in and how long it will take to go over to the next cell to fade in. 
+			Additionally, you can set how long an image will be visible before transcending (caution: word play) to the next image. 
+			If you want random awesomeness, you can set the cell sort order to random which will randomly pick cells to fade in. 
+			You can also set the image order itself to be random.
+		</p>
+		<p class="hidden">
+			But there is more. Try checking out the other features by clicking <span id="stillNot">here</span>.
+		</p>
+		
+		<div id="codeOverlay" class="hidden"></div>
+		<div id="codeWrapper" class="hidden"></div>
+		
+	</div> <!-- main -->
+	
+	<div id="footerBackground">
+	
+		<div id="footer">
+		
+			<span>
+				&copy; 2011 creutzgraphics.de
+			</span>
+		
+			<a href="links/imprint.html">Imprint</a>
+		
+		</div> <!-- footer -->
+	
+	</div> <!-- footerBackground -->
+    
+</body>
+</html>

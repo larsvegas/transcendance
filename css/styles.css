@@ -1,0 +1,402 @@
+html, body {
+	color: #515151;
+	margin:0px;
+	padding:0px;
+	background: #fdfdfd;
+	font-family: "Myriad Pro", Arial;
+}
+
+.clear {
+	clear: both;
+}
+
+.hidden {
+	display: none;
+}
+
+img {
+	border: none;
+}
+
+hr {
+	height: 0px;
+	border: 0px;
+	background: none;
+	border-top: 1px solid #b8b8b8;
+}
+
+/* -- page setup -- */
+/* -- head setup -- */
+
+#topslide {
+	background: #fdfdfd;
+	height: 161px;
+	width: 100%;
+}
+
+#header {
+	margin: 0 auto;
+	width: 1000px;	
+}
+
+#transcendance_logo {
+	float: left;
+	padding-top: 47px;
+}
+
+#nav {
+	float: right;
+	padding-top: 73px;
+}
+
+#main {
+	padding-top: 20px;
+	margin: 0 auto;
+	width: 1000px;
+}
+
+#footer {
+	color: #f1f1f1;
+	height: 32px;
+	overflow: hidden;
+	padding-top: 12px;
+	text-align: center;
+	text-shadow: 1px 1px 1px #000;
+}
+
+/* -- stage setup -- */
+
+#stageBackground, #footerBackground {
+	background-color: #545454;
+	background-image: url('img/shadow_1.png');
+	background-repeat: repeat-x;
+	background-position: top;
+	width: 100%;
+}
+
+#stage, #footer {
+	background-image: url('img/specular.png');
+	background-repeat: no-repeat;
+	background-position: 50% 0;
+	width: 100%;
+}
+
+#stage {
+	padding: 20px 0 10px 0;	
+}
+
+.shadowBottom {
+	background-image: url('img/shadow_2.png');
+	background-repeat: repeat-x;
+	background-position: bottom;
+	height: 9px;
+	width: 100%;
+}
+
+.shadowTop {
+	background-image: url('img/shadow_1.png');
+	background-repeat: repeat-x;
+	background-position: bottom;
+	height: 9px;
+	width: 100%;
+}
+
+#hull {
+	border: solid 1px #3f3f3f;
+	box-shadow: 0px 0px 6px #2f2f2f;
+	height: 400px;
+	overflow: hidden;
+	margin: 0 auto;
+	width: 1000px;
+}
+
+#hull2container {
+	margin: 0 auto;
+	width: 1000px;
+}
+
+#hull2 {
+	border: solid 1px #3f3f3f;
+	box-shadow: 0px 0px 6px #2f2f2f;
+	float: left;
+	height: 310px;
+	overflow: hidden;
+	width: 606px;
+}
+
+.claim {
+	color: #f1f1f1;
+	float: left;
+	font-size: 57px;
+	line-height: 310px;
+	text-align: center;
+	text-shadow: 2px 2px 0px #000;
+	width: 190px;	
+}
+
+.bIcon {
+	opacity: 0.8;
+	margin-right: 12px;	
+}
+
+/* -- ul -- */
+
+ul {
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+}
+
+/* -- ui setup -- */
+
+#uiHull {
+	overflow: hidden;
+	width: 1000px;
+}
+
+#ui {
+	background-color: #545454;
+	background-image: url('img/specular.png');
+	background-repeat: no-repeat;
+	background-position: 50% 0;
+	color: #FFF;
+	overflow: hidden;
+	margin-bottom: 20px;
+	text-shadow: 1px 1px 1px #000;
+	height: auto;
+	width: 1000px;
+	position: relative;
+}
+
+#uiProxy {
+	width: 1000px;	
+}
+
+.uiRow {
+	height: 34px;
+	line-height: 34px;
+	padding-left: 20px;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.uiRow div {
+	float: left;
+}
+
+.uiContDot {
+	width: 20px;
+}
+
+.uiContLeft {
+	width: 150px;
+}
+
+.uiContMid {
+	padding: 0 30px 0 20px;
+	width: 60px;
+}
+
+.uiContMid input {
+	color: #515151;
+	text-align: right;
+	width: 74px;
+	font-size: 12px;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+.uiContMid select {
+	text-align: right;
+	width: 80px;
+}
+
+.uiContRight {
+	color: #9fcd7c;
+	padding: 0 50px;
+}
+
+#uiButtonApply, #uiButtonCode, #footer a:link, #footer a:visited, #codeClose {
+	cursor: pointer;
+	display: block;
+	float: right;
+	height: 27px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	padding: 0 16px 0 16px;
+	text-align: center;
+	line-height: 27px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: none;
+}
+
+#uiButtonApply:hover, #footer a:hover, #codeClose:hover {
+	background-image: url('img/buttonBg1.png');	
+}
+
+#uiButtonCode:hover {
+	background-image: url('img/buttonBg2.png');	
+}
+
+#customizeButton {
+	background-image: url('img/buttonBg3.png');
+	background-repeat: no-repeat;
+	background-position: 0 29px;
+	cursor: pointer;
+	display: block;
+	height: 29px;
+	line-height: 31px;
+	margin: -5px auto;
+	text-align: center;
+	width: 89px;	
+}
+
+.descHull {
+	overflow: hidden;
+	height: 0px;
+}
+
+#codeOverlay {
+	background: #FFF;
+	display: none;
+	height: 100%;
+	left: 0px;
+	position: fixed;
+	top: 0px;	
+	width: 100%;
+}
+
+#codeWrapper {
+	background-color: #545454;
+	background-image: url('img/specular.png');
+	background-repeat: no-repeat;
+	background-position: 50% 0;
+	border: solid 1px #999999;
+	box-shadow: 0px 0px 6px #2f2f2f;
+	color: #FFF;
+	overflow: hidden;
+	padding: 6px;
+	position: fixed;
+	text-align: center;
+	text-shadow: 1px 1px 1px #000;
+	width: 500px;
+	z-index: 99;	
+}
+
+#codeWrapper p.codeLine {
+	font-size: 12px;
+}
+
+#codeWrapper textarea {
+	background: #2a2a2a;
+	border: none;
+	border-bottom: solid 1px #aeaeae;
+	border-right: solid 1px #aeaeae;
+	color: #aeaeae;
+	font-family: "Myriad Pro", arial;
+	font-size: 12px;
+	letter-spacing: 0.6px;
+	margin-bottom: 10px;
+	padding: 20px;
+	width: 400px;
+}
+
+#codeClose {
+	float: none;
+	margin: auto;
+	width: 89px;	
+}
+
+/* -- text and links -- */
+
+#stageBackground h1 {
+	color: #f1f1f1;
+	font-weight: normal;
+	margin: -10px 0 10px;
+	text-align: center;
+	text-shadow: 1px 1px 1px #000;
+}
+
+h2 {
+	font-size: 17px;
+	margin-bottom: 2px;	
+}
+
+h3 {
+	font-size: 15px;	
+}
+
+p {
+	letter-spacing: 0.2px;
+	line-height: 24px;
+	margin-top: 2px;	
+}
+
+p.browser {
+	margin-bottom: 5px;
+}
+
+b {
+	font-weight: 600;	
+}
+
+a:link, a:visited {
+	color: #515151;
+	text-decoration: none;
+}
+
+p a:link, p a:visited, #stillNot, .downloads a:link, .downloads a:visited {
+	color: #0054ff;
+	text-decoration: none;
+}
+
+p a:hover, #stillNot:hover, .downloads a:hover {
+	color: #b7b7b7;	
+	cursor: pointer;
+}
+
+#footer a:link, #footer a:visited {
+	color: #f1f1f1;
+	margin: 0 20px;	
+}
+
+#footer span {
+	font-size: 12px;
+	letter-spacing: 0.2px;
+	line-height: 20px;
+	padding: 0px;
+	position: absolute;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.navlink {
+	background-image: url('img/buttonBg3.png');
+	background-repeat: no-repeat;
+	background-position: 0 29px;
+	display: block;
+	float: left;
+	height: 29px;
+	line-height: 31px;
+	margin-left: 20px;
+	text-align: center;
+	width: 89px;
+}
+
+.navlink:hover, #customizeButton:hover {
+	color: #f1f1f1;
+	background-position: center;
+}
+
+.warning {
+	color: #f1f1f1;
+	padding-top: 21px;
+	text-align: center;	
+}
+
+.hint {
+	font-size: 13px;
+}
+
+
