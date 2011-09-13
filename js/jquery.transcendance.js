@@ -2,7 +2,7 @@
 * jQuery transcendance Plugin
 * Examples and documentation at: creutzgraphics.de/transcendance
 * Copyright (c) 2011 Alexej Creutz
-* Version: 0.1.5 (9-9-2011)
+* Version: 0.1.6 (9-13-2011)
 * Licensed under the GPL license:
 * http://www.gnu.org/licenses/gpl.html
 * Tested on: jQuery v1.6.2
@@ -15,7 +15,7 @@ var transcendance = {
 	},
 	trn = transcendance;
 
-(function($){	
+(function($){
 	
 	/* Used for debugging */
 	function cl(a) {
@@ -50,7 +50,8 @@ var transcendance = {
 					'transAnimBounce': false,			/* true if you want to bounce fading direction */
 					'transAnimType': 'default',			/* determines the order cells are being animated */
 					'transImgOrder': 'default',			/* determines the type of order images are being cycled */ /* NOT IN USE */
-					'transActive' : true				/* used for live update only */
+					'transActive' : true,				/* used for live update only */
+					'transAutoAdjust': true				/* auto adjusts settings like cell amount and delay */
 				};	
 				
 				/* okay then, if the user has defined options, merge with default settings */
@@ -58,7 +59,7 @@ var transcendance = {
 					$.extend(settings, options);
 				};
 				
-				if (Tcont.attr('id') === '') {
+				if (Tcont.attr('id') === '' && Tcont.attr('class') === '') {
 					Tcont.attr('id', 'transEl');	
 				}
 				
@@ -80,7 +81,7 @@ var transcendance = {
 				}).prependTo(Tcont);
 				
 				/* .transDisplay can now be referred to as transD */
-				var transD = Tcont.find('div.transDisplay:first');
+				var transD = Tcont.find('div.transDisplay');
 				
 				/* now each image src gets saved into an array and will later be used as cell background */
 				transBgUrls = Array();
@@ -93,8 +94,8 @@ var transcendance = {
 				Tcont.find('img').remove();
 				
 				/* now the cells are being spawned and put into transD */
-				for (k = 0; k < s.transxLength * s.transyLength; k++) {		
-					$('<div class="transCell"></div>').appendTo($('.transDisplay'));
+				for (i = 0; i < s.transxLength * s.transyLength; i++) {		
+					$('<div class="transCell"></div>').appendTo(transD);
 				};
 				
 				/* shortcut for the cells */
@@ -102,7 +103,27 @@ var transcendance = {
 				
 				/* check if image order is random to generate random start image */
 				if (s.transImgOrder === 'random') {
-					transImgInd = Math.floor(Math.random() * transImgLength);	
+					transImgInd = Math.floor(Math.random() * transImgLength);
+					transD.css('background-image', 'url(' + transBgUrls[transImgInd] + ')');
+				} 
+				else {
+					transImgInd = 1;
+					transD.css('background-image', 'url(' + transBgUrls[0] + ')');
+				}
+				
+				/* check if current setup causes cells to have odd/ double dimensions (xx.yy) */
+				if (s.transAutoAdjust) {
+					if ((transImgDimX / s.transxLength) !== Math.floor(transImgDimX / s.transxLength)) {
+						while ((transImgDimX / s.transxLength) !== Math.floor(transImgDimX / s.transxLength)) {
+							s.transxLength--;
+						};
+					}
+					
+					if ((transImgDimY / s.transyLength) !== Math.floor(transImgDimY / s.transyLength)) {
+						while ((transImgDimY / s.transyLength) !== Math.floor(transImgDimY / s.transyLength)) {
+							s.transyLength--;
+						};	
+					}
 				}
 				
 				/* all the cells need some css now */
@@ -123,25 +144,27 @@ var transcendance = {
 					transDumY = (-1) * (transImgDimY / s.transyLength),
 					transDumX = (transImgDimX / s.transxLength);
 				
-				for (cc = 0; cc < s.transxLength * s.transyLength; cc++) {
+				for (i = 0; i < s.transxLength * s.transyLength; i++) {
 					/* get the current cell */
-					transL = transDC.eq(cc);
+					transL = transDC.eq(i);
 					
 					/* get the current offset for x in background position */
 					transDumX = transDumX + /*Math.round(*/(transImgDimX / s.transxLength)/*)*/;
 					
 					/* if the current cell is the first one in a row, set x positon to 0 and set y position one row lower */
-					if (cc === (s.transxLength * transRx)) {				
+					if (i === (s.transxLength * transRx)) {				
 						transDumX = 0;
 						transRx++;
-						transDumY = transDumY + /*Math.round(*/(transImgDimY / s.transyLength)/*)*/;
+						transDumY = transDumY + (transImgDimY / s.transyLength);
 					};
 					
 					transL.css({'background-position': ((-1) * transDumX) + 'px ' + ((-1) * transDumY) + 'px'});		
 				};
 				
 				/* now please hide all cells */
-				transDC.stop().fadeTo(10, 0.01);
+				for (i = 0; i < transDC.length; i++) {
+					transDC.eq(i).stop().fadeTo(0, 0);
+				};
 				
 				/* ============================================================= */
 				
@@ -163,8 +186,7 @@ var transcendance = {
 					if (transImgRmd[transImgInd] === 1) {
 						while (transImgRmd[transImgInd] === 1) {
 							transImgInd = Math.floor(Math.random() * transImgLength);	
-						};
-						
+						};	
 					};
 					
 					imagesRandomedTotal++;
@@ -178,9 +200,9 @@ var transcendance = {
 						transImgRmd[transImgInd] = 1;
 						
 						getRandomInd(0, function() {
-							transDC.stop().fadeTo(0, 0.0, function() {
-								transDC.css('background-image', 'url(' + transBgUrls[transImgInd] + ')');
-							});
+							for (i = 0; i < transDC.length; i++) {
+								transDC.eq(i).stop().fadeTo(0, 0).css('background-image', 'url(' + transBgUrls[transImgInd] + ')');
+							};
 							
 							if (transGlobal['' + Tcont.attr('id')].transActive === false) {
 								return;
@@ -197,10 +219,8 @@ var transcendance = {
 							transImgInd++;
 						}
 						
-						transDC.css('background-image', 'url(' + transBgUrls[transImgInd] + ')');
-						
 						for (i = 0; i < transDC.length; i++) {
-							transDC.eq(i).stop().fadeTo(0, 0);
+							transDC.eq(i).stop().fadeTo(0, 0).css('background-image', 'url(' + transBgUrls[transImgInd] + ')');
 						};
 						
 						if (transGlobal['' + Tcont.attr('id')].transActive === false) {
@@ -244,7 +264,7 @@ var transcendance = {
 							}
 						}, transImgDelay);
 					}; /* else end */
-				
+			
 				}; /* transGo end */
 				
 				/* ============================================================= */
@@ -311,7 +331,6 @@ var transcendance = {
 									
 									transNext(transGoRandom);
 								}, transImgDelay);
-							
 							}
 							/* if not all cells have been randomed, start over */	
 							else {
@@ -331,19 +350,22 @@ var transcendance = {
 				/* ============================================================= */
 				
 				/* check which animation type is wanted and start the relating function */
-				if (s.transAnimType === 'default' && !s.transAnimBounce) {
-					transGo();
-				}
-				else {
-					if (s.transAnimType === 'random') {
-						transGoRandom();
+				
+				start = setTimeout(function() {
+					if (s.transAnimType === 'default' && !s.transAnimBounce) {
+						transGo();
 					}
 					else {
-						if (s.transAnimBounce && s.transAnimType === 'default') {
-							transGoBounce();	
-						};
-					}; 
-				};
+						if (s.transAnimType === 'random') {
+							transGoRandom();
+						}
+						else {
+							if (s.transAnimBounce && s.transAnimType === 'default') {
+								transGoBounce();	
+							};
+						}; 
+					};	
+				}, s.transImgDelay);
 			}); /* each end */			
 		}, /* init end */
 		transStop : function() {

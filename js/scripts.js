@@ -39,7 +39,13 @@ $(function(){
 	});
 	
 	$('#stillNot').click(function() {
-		$('#customizeButton').click();
+		
+		if (parseInt($('#uiHull').height()) === 0) {
+			$('#customizeButton').click();
+		}
+		else {
+			$('html, body').animate({scrollTop: '500px'}, 800);	
+		}
 	});
 	
 	$('#uiButtonApply').click(function() {	
@@ -100,6 +106,20 @@ $(function(){
 						
 						/* 8 */
 						if ($('.uiContMid').eq(iPiv).find('input').val().match(/[0-9]/) && parseInt($('.uiContMid').eq(iPiv).find('input').val()) > 0)	{
+							trnl[iPiv] = $('.uiContMid').eq(iPiv).find('input').val();
+							markValid();
+							iPiv++;							
+							
+							/* 9 */
+							if ($('.uiContMid').eq(iPiv).find('select').val() === 'true') {
+								trnl[iPiv] = 'true';	
+								iPiv++;	
+							} /* end if 9 */
+							else {
+								trnl[iPiv] = 'false';
+								iPiv++;	
+							};
+							
 							trnl[iPiv] = $('.uiContMid').eq(iPiv).find('input').val();
 							markValid();
 
@@ -163,7 +183,7 @@ $(function(){
 			defaultCode = Array(); 		/* only output code that differs from default settings */
 		
 		
-		defaultCode = ['5', '5', '1200', '90', 'default', 'false', 'default', '2000'];
+		defaultCode = ['5', '5', '1200', '90', 'default', 'false', 'default', '2000', 'true'];
 		
 		for (i = 0; i < $('.uiContLeft').length; i++) {
 			currentCont = $('.uiContMid').eq(i).children().eq(0).val();
