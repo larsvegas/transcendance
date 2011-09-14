@@ -105,6 +105,7 @@ var transcendance = {
 				if (s.transImgOrder === 'random') {
 					transImgInd = Math.floor(Math.random() * transImgLength);
 					transD.css('background-image', 'url(' + transBgUrls[transImgInd] + ')');
+					transImgInd = Math.floor(Math.random() * transImgLength);
 				} 
 				else {
 					transImgInd = 1;

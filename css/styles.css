@@ -347,6 +347,10 @@ a:link, a:visited {
 	text-decoration: none;
 }
 
+a:focus {
+	outline: none;
+}
+
 p a:link, p a:visited, #stillNot, .downloads a:link, .downloads a:visited {
 	color: #0054ff;
 	text-decoration: none;
@@ -365,10 +369,11 @@ p a:hover, #stillNot:hover, .downloads a:hover {
 #footer span {
 	font-size: 12px;
 	letter-spacing: 0.2px;
+	left: 50%;
 	line-height: 20px;
 	padding: 0px;
 	position: absolute;
-	margin: 0 auto;
+	margin-left: -60px;
 	text-align: center;
 }
 

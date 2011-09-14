@@ -138,8 +138,7 @@ $(function(){
 									'<img src=' + '"' + 'images/gallery/sicimg06.jpg' + '" /> ' +
 									'<img src=' + '"' + 'images/gallery/sicimg07.jpg' + '" />' +
 									'</div>'
-								)
-								.prependTo('#hull');
+								).prependTo('#hull');
 								$('#' + nextToTrans)
 								.transcendance({
 									'transxLength': parseInt(trnl[0]), 
@@ -194,7 +193,17 @@ $(function(){
 			}
 			
 			if (addCode === 1) {
-				currentCode += '' + $('div.uiContLeft').eq(i).text() + ': ' + $('.uiContMid').eq(i).children().eq(0).val() + ', ';	
+				if ($('.uiContMid').eq(i).children().eq(0).val() === 'true' || $('.uiContMid').eq(i).children().eq(0).val() === 'false') {
+					currentCode += '"' + $('div.uiContLeft').eq(i).text() + '": ' + $('.uiContMid').eq(i).children().eq(0).val() + ', ';
+				}
+				else {
+					if (!parseInt($('.uiContMid').eq(i).children().eq(0).val())) {
+						currentCode += '"' + $('div.uiContLeft').eq(i).text() + '": ' + '"' + $('.uiContMid').eq(i).children().eq(0).val() + '", ';
+					}
+					else {
+						currentCode += '"' + $('div.uiContLeft').eq(i).text() + '": ' + $('.uiContMid').eq(i).children().eq(0).val() + ', ';	
+					}
+				}
 			}
 			
 			if (i === $('.uiContLeft').length - 1) {
@@ -213,7 +222,6 @@ $(function(){
 		var wWi = $(window).width();
 		
 		$('#codeOverlay').fadeTo(0, 0).css('display', 'block').stop().fadeTo(300, 0.5);
-		//lawl
 		$('#codeWrapper').html('<p><b>Your code was generated:</b></p>' + '<textarea class="codeLine">' + currentCode + '</textarea>' + '<p id="codeClose">close</p>')
 		.css({
 			top: (wHe / 2) - ($('#codeWrapper').height() / 2) + 'px',
@@ -242,7 +250,8 @@ $(function(){
 				'transxLength': 10, 
 				'transyLength': 4,
 				'transAnimSpeed': 900,
-				'transAnimDelay': 50
+				'transAnimDelay': 50,
+				'transImgOrder': 'random'
 			});
 		}
 		
