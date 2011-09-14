@@ -38,7 +38,7 @@ $(function(){
 		}
 	});
 	
-	$('#stillNot').click(function() {
+	$('.stillNot').click(function() {
 		
 		if (parseInt($('#uiHull').height()) === 0) {
 			$('#customizeButton').click();
