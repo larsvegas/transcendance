@@ -98,14 +98,23 @@ var transcendance = {
 					$('<div class="transCell"></div>').appendTo(transD);
 				};
 				
-				/* shortcut for the cells */
+				/* shortcut for all cells */
 				var transDC = Tcont.find('div.transCell');
 				
 				/* check if image order is random to generate random start image */
 				if (s.transImgOrder === 'random') {
+					/* get a random image as initial background */
 					transImgInd = Math.floor(Math.random() * transImgLength);
 					transD.css('background-image', 'url(' + transBgUrls[transImgInd] + ')');
+					
+					/* make sure the next image to be cycled will not be the same index as above */
+					var preventSameRandom = transImgInd;
 					transImgInd = Math.floor(Math.random() * transImgLength);
+					
+					if (preventSameRandom === transImgInd) {
+						/* let's just assume it is a different number now */
+						transImgInd = Math.floor(Math.random() * transImgLength);
+					}
 				} 
 				else {
 					transImgInd = 1;
