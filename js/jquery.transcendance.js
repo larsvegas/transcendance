@@ -2,7 +2,7 @@
 * jQuery transcendance Plugin
 * Examples and documentation at: creutzgraphics.de/transcendance
 * Copyright (c) 2011 Alexej Creutz
-* Version: 0.1.6 (9-13-2011)
+* Version: 0.1.6 (9-15-2011)
 * Licensed under the GPL license:
 * http://www.gnu.org/licenses/gpl.html
 * Tested on: jQuery v1.6.2
@@ -172,9 +172,9 @@ var transcendance = {
 				};
 				
 				/* now please hide all cells */
-				for (i = 0; i < transDC.length; i++) {
-					transDC.eq(i).stop().fadeTo(0, 0);
-				};
+				transDC.each(function() {
+					$(this).stop().fadeTo(0, 0);
+				});
 				
 				/* ============================================================= */
 				
