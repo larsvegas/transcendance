@@ -1,5 +1,9 @@
 $(function(){
 	
+	l = function(a) {
+		console.log(a);
+	}
+	
 	$('.hidden').each(function() {
 		$(this).removeClass('hidden');
 	});
@@ -120,6 +124,16 @@ $(function(){
 								iPiv++;	
 							};
 							
+							/* 10 */
+							if ($('.uiContMid').eq(iPiv).find('select').val() === 'true') {
+								trnl[iPiv] = 'true';	
+								iPiv++;	
+							} /* end if 10 */
+							else {
+								trnl[iPiv] = 'false';
+								iPiv++;	
+							};
+							
 							trnl[iPiv] = $('.uiContMid').eq(iPiv).find('input').val();
 							markValid();
 
@@ -175,14 +189,15 @@ $(function(){
 	
 	$('#uiButtonCode').click(function() {
 		
-		currentCode = '$("#yourId").transcendance({';
+		currentCode = '$("#yourId").transcendance({\n';
 		
 		var currentCont = $('.uiContMid').eq(0).children().eq(0).val(),
 			addCode = 0,
+			codeLines = 1,
 			defaultCode = Array(); 		/* only output code that differs from default settings */
 		
 		
-		defaultCode = ['5', '5', '1200', '90', 'default', 'false', 'default', '2000', 'true'];
+		defaultCode = ['5', '5', '1200', '90', 'default', 'false', 'default', '2000', 'true', 'true'];
 		
 		for (i = 0; i < $('.uiContLeft').length; i++) {
 			currentCont = $('.uiContMid').eq(i).children().eq(0).val();
@@ -194,39 +209,45 @@ $(function(){
 			
 			if (addCode === 1) {
 				if ($('.uiContMid').eq(i).children().eq(0).val() === 'true' || $('.uiContMid').eq(i).children().eq(0).val() === 'false') {
-					currentCode += '"' + $('div.uiContLeft').eq(i).text() + '": ' + $('.uiContMid').eq(i).children().eq(0).val() + ', ';
+					currentCode += '"' + $('div.uiContLeft').eq(i).text() + '": ' + $('.uiContMid').eq(i).children().eq(0).val() + ', \n';
 				}
 				else {
 					if (!parseInt($('.uiContMid').eq(i).children().eq(0).val())) {
-						currentCode += '"' + $('div.uiContLeft').eq(i).text() + '": ' + '"' + $('.uiContMid').eq(i).children().eq(0).val() + '", ';
+						currentCode += '"' + $('div.uiContLeft').eq(i).text() + '": ' + '"' + $('.uiContMid').eq(i).children().eq(0).val() + '", \n';
 					}
 					else {
-						currentCode += '"' + $('div.uiContLeft').eq(i).text() + '": ' + $('.uiContMid').eq(i).children().eq(0).val() + ', ';	
+						currentCode += '"' + $('div.uiContLeft').eq(i).text() + '": ' + $('.uiContMid').eq(i).children().eq(0).val() + ', \n';	
 					}
 				}
+				codeLines++;
 			}
 			
 			if (i === $('.uiContLeft').length - 1) {
-				currentCode = currentCode.substring(0, currentCode.length - 2);
+				currentCode = currentCode.substring(0, currentCode.length - 3);
 			}
 			
 		}
 		
-		currentCode += '});';
+		currentCode += '\n});';
+		codeLines++;
 		
-		if (currentCode === '$("#yourId").transcendance});') {
-			currentCode = 'No non-default options have been set. Your code is $("#yourId").transcendance();';	
+		if (codeLines === 2) {
+			currentCode = 'No non-default options have been set. Your code is \n\n$("#yourId").transcendance();';
+			codeLines++;	
 		}
 		
-		var wHe = $(window).height();
-		var wWi = $(window).width();
+		var wHe = $(window).height(),
+			wWi = $(window).width();
 		
 		$('#codeOverlay').fadeTo(0, 0).css('display', 'block').stop().fadeTo(300, 0.5);
-		$('#codeWrapper').html('<p><b>Your code was generated:</b></p>' + '<textarea class="codeLine">' + currentCode + '</textarea>' + '<p id="codeClose">close</p>')
-		.css({
+		$('#codeWrapper').html('<p><b>Your code was generated:</b></p>' + '<textarea class="codeLine">' + currentCode + '</textarea>' + '<p id="codeClose">close</p>');
+		$('#codeWrapper textarea').css('height', codeLines * 15 + 'px');
+		
+		$('#codeWrapper').css({
 			top: (wHe / 2) - ($('#codeWrapper').height() / 2) + 'px',
 			left: (wWi / 2) - ($('#codeWrapper').width() / 2) + 'px'
 		}).stop().fadeTo(0, 0).fadeTo(500, 1.0);
+		
 		
 		$('#codeClose, #codeOverlay').live('click', function(){
 			$('#codeOverlay').stop().fadeTo(300, 0, function() {

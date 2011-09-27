@@ -51,7 +51,8 @@ var transcendance = {
 					'transAnimType': 'default',			/* determines the order cells are being animated */
 					'transImgOrder': 'default',			/* determines the type of order images are being cycled */ /* NOT IN USE */
 					'transActive' : true,				/* used for live update only */
-					'transAutoAdjust': true				/* auto adjusts settings like cell amount and delay */
+					'transAutoAdjust': true,			/* auto adjusts settings like cell amount and delay */
+					'transPause': true					/* if true, stops cycling on mouseover */
 				};	
 				
 				/* okay then, if the user has defined options, merge with default settings */
@@ -204,6 +205,32 @@ var transcendance = {
 				};
 				
 				/* ============================================================= */
+				/**/
+				var pauseInt = 700;
+				
+				function transPause(f) {
+					if (transGlobal['' + Tcont.attr('id')].transPause === true) {
+						waitForContinue = setTimeout(function() {
+							transPause(f);	
+						}, pauseInt);
+					} 
+					else {
+						f();
+					}
+				}
+				
+				if (s.transPause) {
+					Tcont.bind('mouseenter', function(e) {
+						e.stopPropagation();
+						transGlobal['' + Tcont.attr('id')].transPause = true;
+					});
+					
+					Tcont.bind('mouseleave', function(e) {
+						e.stopPropagation();
+						transGlobal['' + Tcont.attr('id')].transPause = false;
+					});
+				}
+				/* ============================================================= */
 				/* transNext will start the next trancedance */
 				function transNext(f) {
 					if (s.transImgOrder === 'random') {
@@ -218,7 +245,12 @@ var transcendance = {
 								return;
 							}
 							else {
-								f();	
+								if (transGlobal['' + Tcont.attr('id')].transPause === true) {
+									transPause(f);
+								} 
+								else {
+									f();	
+								}
 							}
 						});
 					} else {

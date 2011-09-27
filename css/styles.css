@@ -55,6 +55,27 @@ hr {
 	width: 1000px;
 }
 
+.col {
+	padding-top: 20px;
+	width: 100%;
+}
+
+.col div {
+	/*border: solid 1px black;
+	*/float: left;
+	margin-right: 48px;
+	width: 30%;
+}
+
+.col div p {
+	text-align: justify;
+}
+
+.col div:last-child {
+	margin: 0px;
+	
+}
+
 #footer {
 	color: #f1f1f1;
 	height: 32px;
