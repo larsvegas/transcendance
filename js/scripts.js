@@ -134,8 +134,8 @@ $(function(){
 								iPiv++;	
 							};
 							
-							trnl[iPiv] = $('.uiContMid').eq(iPiv).find('input').val();
-							markValid();
+							//trnl[iPiv] = $('.uiContMid').eq(iPiv).find('input').val();
+							//markValid();
 
 							$('#' + nextToTrans + '').transcendance('transStop');
 							$('#' + nextToTrans + '').children().each(function() {$(this).remove();});
@@ -162,7 +162,9 @@ $(function(){
 									'transAnimBounce': trnl[5], 
 									'transAnimType': trnl[4],
 									'transImgOrder': trnl[6],
-									'transImgDelay': parseInt(trnl[7])
+									'transImgDelay': parseInt(trnl[7]),
+									'transAutoAdjust': parseInt(trnl[8]),
+									'transPause': parseInt(trnl[9])
 								});
 							}, 1000);
 						} /* end if 8 */

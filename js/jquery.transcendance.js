@@ -206,10 +206,11 @@ var transcendance = {
 				
 				/* ============================================================= */
 				/**/
-				var pauseInt = 700;
+				var pauseInt = 700, 
+					transPaused = 0;
 				
 				function transPause(f) {
-					if (transGlobal['' + Tcont.attr('id')].transPause === true) {
+					if (transGlobal['' + Tcont.attr('id')].transPause === true && transPaused === 1) {
 						waitForContinue = setTimeout(function() {
 							transPause(f);	
 						}, pauseInt);
@@ -223,6 +224,7 @@ var transcendance = {
 					Tcont.bind('mouseenter', function(e) {
 						e.stopPropagation();
 						transGlobal['' + Tcont.attr('id')].transPause = true;
+						transPaused = 1;
 					});
 					
 					Tcont.bind('mouseleave', function(e) {
