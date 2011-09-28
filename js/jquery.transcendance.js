@@ -2,7 +2,7 @@
 * jQuery transcendance Plugin
 * Examples and documentation at: creutzgraphics.de/transcendance
 * Copyright (c) 2011 Alexej Creutz
-* Version: 0.1.6 (9-15-2011)
+* Version: 0.1.7 (9-28-2011)
 * Licensed under the GPL license:
 * http://www.gnu.org/licenses/gpl.html
 * Tested on: jQuery v1.6.2
@@ -55,7 +55,7 @@ var transcendance = {
 					'transPause': true					/* if true, stops cycling on mouseover */
 				};	
 				
-				/* okay then, if the user has defined options, merge with default settings */
+				/* okay then, if the user has defined any options, merge with default settings */
 				if (options) { 
 					$.extend(settings, options);
 				};
@@ -84,7 +84,7 @@ var transcendance = {
 				/* .transDisplay can now be referred to as transD */
 				var transD = Tcont.find('div.transDisplay');
 				
-				/* now each image src gets saved into an array and will later be used as cell background */
+				/* now each image src gets saved into an array and will later be used as cell backgrounds */
 				transBgUrls = Array();
 				
 				for (i = 0; i < transImgLength; i++) {

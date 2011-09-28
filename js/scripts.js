@@ -1,7 +1,9 @@
 $(function(){
 	
 	l = function(a) {
-		console.log(a);
+		if (console) {
+			console.log(a);
+		}
 	}
 	
 	$('.hidden').each(function() {
@@ -131,7 +133,7 @@ $(function(){
 							} /* end if 10 */
 							else {
 								trnl[iPiv] = 'false';
-								iPiv++;	
+								//iPiv++;	
 							};
 							
 							//trnl[iPiv] = $('.uiContMid').eq(iPiv).find('input').val();
