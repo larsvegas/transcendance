@@ -49,9 +49,9 @@ var transcendance = {
 					'transImgDelay': 2000,				/* delay until a new image gets cycled after all cells have faded in */
 					'transAnimBounce': false,			/* true if you want to bounce fading direction */
 					'transAnimType': 'default',			/* determines the order cells are being animated */
-					'transImgOrder': 'default',			/* determines the type of order images are being cycled */ /* NOT IN USE */
+					'transImgOrder': 'default',			/* determines the type of order images are being cycled */
 					'transActive' : true,				/* used for live update only */
-					'transAutoAdjust': true,			/* auto adjusts settings like cell amount and delay */
+					'transAutoAdjust': true,			/* auto adjusts settings like cell amount //and delay */
 					'transPause': true					/* if true, stops cycling on mouseover */
 				};	
 				
