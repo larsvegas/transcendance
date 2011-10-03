@@ -155,7 +155,6 @@ var transcendance = {
 						};	
 					}
 					
-					l(s.transxLength);
 				}
 				
 				/* all the cells need some css now */
@@ -242,16 +241,21 @@ var transcendance = {
 				}
 				
 				if (s.transPause) {
+					l(Tcont);
 					Tcont.bind('mouseenter', function(e) {
-						e.stopPropagation();
+						//e.stopPropagation();
 						transGlobal['' + Tcont.attr('id')].transPause = true;
 						transPaused = 1;
 					});
 					
 					Tcont.bind('mouseleave', function(e) {
-						e.stopPropagation();
+						//e.stopPropagation();
 						transGlobal['' + Tcont.attr('id')].transPause = false;
 					});
+				}
+				else {
+					Tcont.unbind('mouseenter');
+					Tcont.unbind('mouseleave');
 				}
 				/* ============================================================= */
 				/* transNext will start the next trancedance */
@@ -292,7 +296,12 @@ var transcendance = {
 							return;
 						}
 						else {
-							f();	
+							if (transGlobal['' + Tcont.attr('id')].transPause === true) {
+								transPause(f);
+							} 
+							else {
+								f();	
+							}	
 						}	
 					}
 				};

@@ -55,6 +55,7 @@ $(function(){
 	
 	$('#uiButtonApply').click(function() {	
 		iPiv = 0;
+		trnl = {};
 		/* 1 */
 		if ($('.uiContMid').eq(iPiv).find('input').val().match(/[0-9]/) && parseInt($('.uiContMid').eq(iPiv).find('input').val()) > 0) {
 			trnl[iPiv] = $('.uiContMid').eq(iPiv).find('input').val();
