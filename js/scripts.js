@@ -1,7 +1,7 @@
 $(function(){
 	
-	l = function(a) {
-		if (console) {
+	if (console) {
+		l = function(a) {
 			console.log(a);
 		}
 	}
@@ -45,7 +45,6 @@ $(function(){
 	});
 	
 	$('.stillNot').click(function() {
-		
 		if (parseInt($('#uiHull').height()) === 0) {
 			$('#customizeButton').click();
 		}
@@ -118,22 +117,22 @@ $(function(){
 							
 							/* 9 */
 							if ($('.uiContMid').eq(iPiv).find('select').val() === 'true') {
-								trnl[iPiv] = 'true';	
+								trnl[iPiv] = true;	
 								iPiv++;	
 							} /* end if 9 */
 							else {
-								trnl[iPiv] = 'false';
+								trnl[iPiv] = false;
 								iPiv++;	
 							};
 							
 							/* 10 */
 							if ($('.uiContMid').eq(iPiv).find('select').val() === 'true') {
-								trnl[iPiv] = 'true';	
+								trnl[iPiv] = true;	
 								iPiv++;	
 							} /* end if 10 */
 							else {
-								trnl[iPiv] = 'false';
-								//iPiv++;	
+								trnl[iPiv] = false;
+								iPiv++;	
 							};
 							
 							//trnl[iPiv] = $('.uiContMid').eq(iPiv).find('input').val();
@@ -155,18 +154,17 @@ $(function(){
 									'<img src=' + '"' + 'images/gallery/sicimg07.jpg' + '" />' +
 									'</div>'
 								).prependTo('#hull');
-								$('#' + nextToTrans)
-								.transcendance({
+								$('#' + nextToTrans).transcendance({
 									'transxLength': parseInt(trnl[0]), 
 									'transyLength': parseInt(trnl[1]),
 									'transAnimSpeed': parseInt(trnl[2]),
 									'transAnimDelay': parseInt(trnl[3]),
-									'transAnimBounce': trnl[5], 
 									'transAnimType': trnl[4],
+									'transAnimBounce': trnl[5],
 									'transImgOrder': trnl[6],
 									'transImgDelay': parseInt(trnl[7]),
-									'transAutoAdjust': parseInt(trnl[8]),
-									'transPause': parseInt(trnl[9])
+									'transAutoAdjust': trnl[8],
+									'transPause': trnl[9]
 								});
 							}, 1000);
 						} /* end if 8 */
@@ -201,7 +199,7 @@ $(function(){
 			defaultCode = Array(); 		/* only output code that differs from default settings */
 		
 		
-		defaultCode = ['5', '5', '1200', '90', 'default', 'false', 'default', '2000', 'true', 'true'];
+		defaultCode = ['5', '5', '1200', '90', 'default', 'false', 'default', '2000', 'true', 'false'];
 		
 		for (i = 0; i < $('.uiContLeft').length; i++) {
 			currentCont = $('.uiContMid').eq(i).children().eq(0).val();
@@ -269,36 +267,30 @@ $(function(){
 		}	
 	});
 	
+	/////////////////////////////////
+	
+	waveAnim = function() {
+		$('#wave').animate({backgroundPosition: '-2000px 50%'}, 30000, 'linear', function() {
+			$('#wave').css('background-position', '0px 50%');
+			waveAnim();	
+		});	
+	}
+	
+	//waveAnim();
+	
+	
+	
 	$(window).load(function() {
-		if ($('#hull')) {
-			$('#' + nextToTrans).transcendance({
-				'transxLength': 10, 
-				'transyLength': 4,
-				'transAnimSpeed': 900,
-				'transAnimDelay': 50,
-				'transImgOrder': 'random'
-			});
-		}
-		
-		// if on site download
-		if ($('#hull2')) {
-			$('#hull2').transcendance({
-				'transxLength': 1,
-				'transyLength': 31,
-				'transAnimSpeed': 1000,
-				'transAnimDelay': 40,
-				'transImgOrder': 'random'	
-			});	
-			
-		}
+		$('#' + nextToTrans).transcendance({
+			'transxLength': 10, 
+			'transyLength': 1,
+			'transAnimSpeed': 1200,
+			'transImgOrder': 'random',
+			'transAnimDelay': 90
+		});
 	});
 	
 	/* end: home */
-	/* start: downlaod */
-	
-	
-	
-	/* end: downlaod */
 	
 }); /* doc ready */
 

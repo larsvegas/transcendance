@@ -88,22 +88,29 @@ hr {
 /* -- stage setup -- */
 
 #stageBackground, #footerBackground {
-	background-color: #545454;
+	background-color: #3c3c3c;
 	background-image: url('img/shadow_1.png');
 	background-repeat: repeat-x;
 	background-position: top;
 	width: 100%;
 }
 
+/*#wave {
+	background-image: url('img/wave.png');
+	background-repeat: repeat-x;
+	background-position: 0% 50%;
+	width: 100%;	
+}*/
+
 #stage, #footer {
 	background-image: url('img/specular.png');
 	background-repeat: no-repeat;
-	background-position: 50% 0;
+	background-position: center top;
 	width: 100%;
 }
 
 #stage {
-	padding: 20px 0 10px 0;	
+	padding: 20px 0 10px 0;
 }
 
 .shadowBottom {
@@ -176,7 +183,7 @@ ul {
 }
 
 #ui {
-	background-color: #545454;
+	background-color: #3c3c3c;
 	background-image: url('img/specular.png');
 	background-repeat: no-repeat;
 	background-position: 50% 0;
@@ -290,7 +297,7 @@ ul {
 }
 
 #codeWrapper {
-	background-color: #545454;
+	background-color: #3c3c3c;
 	background-image: url('img/specular.png');
 	background-repeat: no-repeat;
 	background-position: 50% 0;
