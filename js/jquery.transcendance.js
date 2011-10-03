@@ -2,7 +2,7 @@
 * jQuery transcendance Plugin
 * Examples and documentation at: creutzgraphics.de/transcendance
 * Copyright (c) 2011 Alexej Creutz
-* Version: 0.1.7 (9-28-2011)
+* Version: 0.1.7 (10-03-2011)
 * Licensed under the GPL license:
 * http://www.gnu.org/licenses/gpl.html
 * Tested on: jQuery v1.6.2
@@ -39,6 +39,7 @@ var transcendance = {
 					transBounce = 0,										/* used for bounce state */
 					transImgRmd = Array(),									/* saves the indexes of images that have/ have not been randomed */
 					imagesRandomedTotal = 1,								/* counter to determine when to reset transImgRmd */
+					transLinks = false,										/* if true, image linking will be active */
 					
 				/* define customizable settings */
 				settings = {				
@@ -52,7 +53,7 @@ var transcendance = {
 					'transImgOrder': 'default',			/* determines the type of order images are being cycled */
 					'transActive' : true,				/* used for live update only */
 					'transAutoAdjust': true,			/* auto adjusts settings like cell amount //and delay */
-					'transPause': true					/* if true, stops cycling on mouseover */
+					'transPause': false					/* if true, stops cycling on mouseover */
 				};	
 				
 				/* okay then, if the user has defined any options, merge with default settings */
@@ -68,7 +69,7 @@ var transcendance = {
 				transGlobal['' + Tcont.attr('id') + ''] = settings;
 				
 				/* to access the settings more easily, make a shortcut for settings */
-				s = settings;
+				var s = settings;
 				
 				/* transImgDelay needs to be greater than transAnimSpeed + Delay */
 				var transImgDelay = s.transAnimSpeed + s.transAnimDelay + s.transImgDelay + 100;
@@ -78,21 +79,39 @@ var transcendance = {
 					width: Tcont.find('img').eq(0).width() + 1 + 'px',
 					height: Tcont.find('img').eq(0).height() + 1 + 'px',
 					'background': 'none',
-					'background-repeat': 'no-repeat'
+					'background-repeat': 'no-repeat',
+					'cursor': 'default'
 				}).prependTo(Tcont);
 				
-				/* .transDisplay can now be referred to as transD */
-				var transD = Tcont.find('div.transDisplay');
 				
-				/* now each image src gets saved into an array and will later be used as cell backgrounds */
-				transBgUrls = Array();
+				var transD = Tcont.find('div.transDisplay'),		/* .transDisplay can now be referred to as transD */
+					transBgUrls = Array(), 							/* saves all image paths to use as backgrounds */
+					transHrefs = Array();							/* if anchors are there, save their hrefs and apply to current image */
 				
 				for (i = 0; i < transImgLength; i++) {
 					transBgUrls[i] = Tcont.find('img').eq(i).attr('src');
 				};
 				
-				/* now all images in Tcont need to be hidden.. well, actually you can remove them */
-				Tcont.find('img').remove();
+				/* for each image that is inside an a, save the a's href */
+				if (Tcont.find('a').length > 0) {
+					for (i = 0; i < transImgLength; i++) {
+						var imageParent = Tcont.find('img').eq(i).parent('a');
+						if (imageParent.length === 1) {
+							transHrefs[i] = '' + imageParent.attr('href') + '|' + imageParent.attr('target');
+						}
+						else {
+							transHrefs[i] = 'empty|';
+						}
+					};
+					transLinks = true;
+					Tcont.find('a').remove();
+					transD.css('cursor', 'pointer');
+				}
+				else {
+					Tcont.find('img').remove();	
+				}
+				
+				//l(transHrefs);
 				
 				/* now the cells are being spawned and put into transD */
 				for (i = 0; i < s.transxLength * s.transyLength; i++) {		
@@ -135,6 +154,7 @@ var transcendance = {
 							s.transyLength--;
 						};	
 					}
+					
 				}
 				
 				/* all the cells need some css now */
@@ -221,16 +241,21 @@ var transcendance = {
 				}
 				
 				if (s.transPause) {
+					l(Tcont);
 					Tcont.bind('mouseenter', function(e) {
-						e.stopPropagation();
+						//e.stopPropagation();
 						transGlobal['' + Tcont.attr('id')].transPause = true;
 						transPaused = 1;
 					});
 					
 					Tcont.bind('mouseleave', function(e) {
-						e.stopPropagation();
+						//e.stopPropagation();
 						transGlobal['' + Tcont.attr('id')].transPause = false;
 					});
+				}
+				else {
+					Tcont.unbind('mouseenter');
+					Tcont.unbind('mouseleave');
 				}
 				/* ============================================================= */
 				/* transNext will start the next trancedance */
@@ -271,7 +296,12 @@ var transcendance = {
 							return;
 						}
 						else {
-							f();	
+							if (transGlobal['' + Tcont.attr('id')].transPause === true) {
+								transPause(f);
+							} 
+							else {
+								f();	
+							}	
 						}	
 					}
 				};
@@ -410,6 +440,7 @@ var transcendance = {
 						}; 
 					};	
 				}, s.transImgDelay);
+				
 			}); /* each end */			
 		}, /* init end */
 		transStop : function() {
