@@ -2,7 +2,7 @@
 * jQuery transcendance Plugin
 * Examples and documentation at: creutzgraphics.de/transcendance
 * Copyright (c) 2011 Alexej Creutz
-* Version: 0.1.7 (10-03-2011)
+* Version: 0.1.8 (10-04-2011)
 * Licensed under the GPL license:
 * http://www.gnu.org/licenses/gpl.html
 * Tested on: jQuery v1.6.2
@@ -86,7 +86,8 @@ var transcendance = {
 				
 				var transD = Tcont.find('div.transDisplay'),		/* .transDisplay can now be referred to as transD */
 					transBgUrls = Array(), 							/* saves all image paths to use as backgrounds */
-					transHrefs = Array();							/* if anchors are there, save their hrefs and apply to current image */
+					transHrefs = Array(),							/* if anchors are there, save their hrefs and apply to current image */
+					currentHref = 0;
 				
 				for (i = 0; i < transImgLength; i++) {
 					transBgUrls[i] = Tcont.find('img').eq(i).attr('src');
@@ -97,7 +98,11 @@ var transcendance = {
 					for (i = 0; i < transImgLength; i++) {
 						var imageParent = Tcont.find('img').eq(i).parent('a');
 						if (imageParent.length === 1) {
-							transHrefs[i] = '' + imageParent.attr('href') + '|' + imageParent.attr('target');
+							var href = '' + imageParent.attr('href');
+							if (imageParent.attr('target')) {
+								href += '|' + imageParent.attr('target');
+							};
+							transHrefs[i] = href;
 						}
 						else {
 							transHrefs[i] = 'empty|';
@@ -106,12 +111,15 @@ var transcendance = {
 					transLinks = true;
 					Tcont.find('a').remove();
 					transD.css('cursor', 'pointer');
+					
+					Tcont.bind('click', function(e) {
+						e.stopPropagation();
+						window.location.href = 	transHrefs[transImgInd];
+					});
 				}
 				else {
-					Tcont.find('img').remove();	
+					Tcont.find('img').remove();
 				}
-				
-				//l(transHrefs);
 				
 				/* now the cells are being spawned and put into transD */
 				for (i = 0; i < s.transxLength * s.transyLength; i++) {		
@@ -243,13 +251,13 @@ var transcendance = {
 				if (s.transPause) {
 					l(Tcont);
 					Tcont.bind('mouseenter', function(e) {
-						//e.stopPropagation();
+						e.stopPropagation();
 						transGlobal['' + Tcont.attr('id')].transPause = true;
 						transPaused = 1;
 					});
 					
 					Tcont.bind('mouseleave', function(e) {
-						//e.stopPropagation();
+						e.stopPropagation();
 						transGlobal['' + Tcont.attr('id')].transPause = false;
 					});
 				}
