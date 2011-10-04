@@ -114,7 +114,9 @@ var transcendance = {
 					
 					Tcont.bind('click', function(e) {
 						e.stopPropagation();
-						window.location.href = 	transHrefs[transImgInd];
+						if (transHrefs[transImgInd].indexOf('empty|') < 0) {
+							window.location.href = transHrefs[transImgInd];
+						} 
 					});
 				}
 				else {
